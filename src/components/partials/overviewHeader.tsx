@@ -5,11 +5,11 @@ import ChaseLogo from "../../../public/logo_chase_for_business_wht.svg";
 import { Menu, Search, FlagIcon, UserCircle } from "lucide-react";
 import Image from "next/image";
 
-const OverviewHeader = () => {
+const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
   const IconClassName = "text-white";
   return (
     <div className="bg-[#002f6c] text-white">
-      <div className=" h-[60px] flex justify-between items-center px-6">
+      <div className="h-[60px] flex justify-between items-center px-screen-x max-w-[1440px] mx-auto">
         <div className="flex items-center gap-4">
           <Menu color="white" />
           <div className="relative w-[220px] h-[32px]">
@@ -28,7 +28,7 @@ const OverviewHeader = () => {
         </div>
       </div>
       <OverviewLinks />
-      <OverviewLinkOptions />
+      {showOptions && <OverviewLinkOptions />}
     </div>
   );
 };
@@ -46,11 +46,11 @@ const OverviewLinks = () => {
   const [activeLink, setActiveLink] = useState("Accounts");
   return (
     <>
-      <div className="flex gap-4 py-2 px-6">
+      <div className="flex gap-4 py-2 px-screen-x max-w-[1440px] mx-auto">
         {Links.map((link, index) => (
           <div
             key={index}
-            className="relative text-[14px] hover:bg-[#00275b] px-1 rounded-[5px] cursor-pointer"
+            className="relative text-[16px] font-[600] hover:bg-[#00275b] px-1 rounded-[5px] cursor-pointer"
             onClick={() => setActiveLink(link)}
           >
             {link}
@@ -76,20 +76,22 @@ const OverviewLinkOptions = () => {
   const [selectedLink, setSelectedLink] = useState("Overview");
 
   return (
-    <div className="bg-white text-[#475969] flex items-center gap-4 h-14 px-6">
-      {links.map((link, index) => (
-        <div
-          className={`rounded-[10px] border-1 py-[2px] px-2 cursor-pointer ${
-            link === selectedLink
-              ? "bg-[#ebeff3] text-[#0d5fb6] border-[#0d5fb6]"
-              : "border-transparent"
-          }`}
-          onClick={() => setSelectedLink(link)}
-          key={index}
-        >
-          {link}
-        </div>
-      ))}
+    <div className="bg-white text-[#475969] h-14">
+      <div className="flex items-center gap-4 h-full max-w-[1440px] px-screen-x mx-auto">
+        {links.map((link, index) => (
+          <div
+            className={`rounded-[10px] text-sm font-[600] border-1 py-[2px] px-2 cursor-pointer ${
+              link === selectedLink
+                ? "bg-[#ebeff3] text-[#0d5fb6] border-[#0d5fb6]"
+                : "border-transparent"
+            }`}
+            onClick={() => setSelectedLink(link)}
+            key={index}
+          >
+            {link}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -3,13 +3,13 @@ import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 const CustomerInsight = () => {
   return (
-    <div className="px-4 py-2 bg-white rounded-[10px] border-1 border-gray-300 h-fit">
-      <h1 className="font-bold">Customer Insight</h1>
+    <div className="px-4 py-4 bg-white rounded-[10px] border-1 border-gray-300 h-fit">
+      <h1 className="text-[15px] font-[600]">Customer Insight</h1>
       <div className="flex items-center">
-        <div className="w-[50px] h-[60px]">
+        <div className="w-[70px] h-[60px]">
           <Image src={"bulb.svg"} alt="" width={50} height={60} />
         </div>
-        <p>
+        <p className="text-[14px]">
           Get to know your customers, track your sales and access industry
           trends
         </p>

@@ -9,7 +9,7 @@ const ExternalAccounts = () => {
         <ChevronUp />
       </div>
       <div className="flex flex-col items-center">
-        <p className="text-[15px] text-gray-500">
+        <p className="text-[15px] text-gray-500 my-2">
           Link your external accounts to better organize your money, budget and
           plan for the future.
         </p>

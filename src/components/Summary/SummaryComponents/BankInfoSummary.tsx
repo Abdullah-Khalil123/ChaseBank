@@ -1,8 +1,9 @@
-import React from "react";
-import { ChevronRight, Printer, ChevronUp, ChevronDown } from "lucide-react";
+import { ChevronRight, ChevronUp, Printer } from "lucide-react";
 import Link from "next/link";
+import React from "react";
+import AccountButton from "./AccountButton";
 
-const BankAccount = () => {
+const BankInfoSummary = () => {
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
       <div className="text-[14px] font-bold text-gray-700 flex justify-between px-4 py-3">
@@ -23,16 +24,9 @@ const BankAccount = () => {
           >
             BUS COMPLETE CHK (..6032) <ChevronRight />
           </Link>
-          <div className="flex">
-            <button className="bg-[#002f6c] text-white text-[14px] font-bold px-2 rounded-[5px]">
-              Transfer money
-            </button>
-            <button className="flex items-center border-[1px] rounded-[5px] pl-2 pr-1 font-[12px] ml-4">
-              More <ChevronDown />
-            </button>
-          </div>
+          <AccountButton />
         </div>
-        <div className="flex items-end gap-10 px-4 py-4">
+        <div className="flex items-end justify-between w-[50%] px-4 py-4">
           <div>
             <h1 className="text-4xl font-[600]">$20,151.91</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
@@ -41,14 +35,14 @@ const BankAccount = () => {
           </div>
 
           <div>
-            <h1>$20,151.91</h1>
+            <h1>$0</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Present balance
             </p>
           </div>
 
           <div>
-            <h1>$20,151.91</h1>
+            <h1>$0</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Available credit
             </p>
@@ -59,4 +53,4 @@ const BankAccount = () => {
   );
 };
 
-export default BankAccount;
+export default BankInfoSummary;
