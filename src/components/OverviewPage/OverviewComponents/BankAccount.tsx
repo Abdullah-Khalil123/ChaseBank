@@ -1,8 +1,39 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { ChevronRight, Printer, ChevronUp, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const BankAccount = () => {
+  const [data, setData] = useState<{
+    accountTitle: string;
+    name: string;
+    availableBalance: string;
+    presentBalance: string;
+    availableCredit: string;
+  }>({
+    accountTitle: "",
+    name: "",
+    availableBalance: "",
+    presentBalance: "",
+    availableCredit: "",
+  });
+
+  useEffect(() => {
+    const stored = localStorage.getItem("accountData");
+    if (stored) {
+      setData(JSON.parse(stored));
+    } else {
+      setData({
+        accountTitle: "BUS COMPLETE CHK (...6032)",
+        name: "TIGER PRODUCTS LLC",
+        availableBalance: "20,249.75",
+        presentBalance: "20,249.75",
+        availableCredit: "0.00",
+      });
+    }
+  }, []);
+
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
       <div className="text-[14px] font-bold text-gray-700 flex justify-between px-4 py-3">
@@ -12,16 +43,18 @@ const BankAccount = () => {
           <ChevronUp className="ml-2" />
         </div>
       </div>
-      <h3 className="bg-[#f5f7fa] py-2 font-bold text-[14px] px-4 border-t-1 border-gray-300">
-        TIGER PRODUCT INC.
+
+      <h3 className="bg-[#f5f7fa] py-2 font-bold text-[14px] px-4 border-t-1 border-gray-300 uppercase">
+        {data.name}
       </h3>
+
       <div>
         <div className="flex justify-between items-center text-[#0d5fb6] font-[600] px-4 pt-4">
           <Link
             href={"/summary"}
             className="flex hover:bg-[#ebeff3] px-2 py-1 rounded-[5px] cursor-pointer items-center"
           >
-            BUS COMPLETE CHK (..6032) <ChevronRight />
+            {data.accountTitle} <ChevronRight />
           </Link>
           <div className="flex">
             <button className="bg-[#002f6c] text-white text-[14px] font-bold px-2 rounded-[5px]">
@@ -32,23 +65,24 @@ const BankAccount = () => {
             </button>
           </div>
         </div>
+
         <div className="flex items-end gap-10 px-4 py-4">
           <div>
-            <h1 className="text-4xl font-[600]">$20,151.91</h1>
+            <h1 className="text-4xl font-[600]">${data.availableBalance}</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Available balance
             </p>
           </div>
 
           <div>
-            <h1>$20,151.91</h1>
+            <h1>${data.presentBalance}</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Present balance
             </p>
           </div>
 
           <div>
-            <h1>$20,151.91</h1>
+            <h1>${data.availableCredit}</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Available credit
             </p>

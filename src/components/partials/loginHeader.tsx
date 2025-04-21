@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const LoginHeader = () => {
   return (
-    <div className="flex justify-center items-center h-[84px]">
+    <div className="flex justify-center items-center h-[84px] bg-gradient-to-b from-black/70 to-transparent">
       <div className="relative w-[220px] h-[32px]">
         <Image
           src={"/wordmark-white.svg"}

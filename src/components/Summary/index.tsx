@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Button from "./SummaryComponents/Button";
 import BreadCrumb from "./SummaryComponents/BreadCrumb";
 import Divider from "./SummaryComponents/Divider";
@@ -31,7 +32,37 @@ const SummaryPage = () => {
   );
 };
 
+interface BalanceData {
+  accountTitle: string;
+  name: string;
+  availableBalance: string;
+  presentBalance: string;
+  availableCredit: string;
+}
+
 const BalanceDetail = () => {
+  const [data, setData] = useState<BalanceData>({
+    accountTitle: "",
+    name: "",
+    availableBalance: "",
+    presentBalance: "",
+    availableCredit: "",
+  });
+
+  useEffect(() => {
+    const stored = localStorage.getItem("accountData");
+    if (stored) {
+      setData(JSON.parse(stored));
+    } else {
+      setData({
+        accountTitle: "BUS COMPLETE CHK (...6032)",
+        name: "TIGER PRODUCTS LLC",
+        availableBalance: "20,249.75",
+        presentBalance: "20,249.75",
+        availableCredit: "0.00",
+      });
+    }
+  }, []);
   return (
     <div className="bg-white pb-6">
       <OverviewHeader showOptions={false} />
@@ -39,9 +70,9 @@ const BalanceDetail = () => {
         <div className="w-[1024px]">
           <BreadCrumb />
           <Divider />
-          <p className="text-[14px]">BUS COMPLETE CHK (...6032)</p>
-          <p className="text-[12px] text-gray-600">TIGER PRODUCT INC.</p>
-          <Balance />
+          <p className="text-[14px]">{data.accountTitle}</p>
+          <p className="text-[12px] text-gray-600">{data.name}</p>
+          <Balance data={data} />
           <div className="mt-4" />
           <Divider />
           <div className="mt-6" />
@@ -60,12 +91,12 @@ const BalanceDetail = () => {
   );
 };
 
-const Balance = () => {
+const Balance = ({ data }: { data: BalanceData }) => {
   return (
     <div>
       <div className="flex justify-between items-start font-[600] pt-4">
         <div className="mb-4">
-          <h1 className="text-4xl">$20,151.91</h1>
+          <h1 className="text-4xl">{data.availableBalance}</h1>
           <p className="text-[12px] font-normal border-b border-dashed border-gray-500 w-fit">
             Available balance
           </p>
@@ -74,21 +105,23 @@ const Balance = () => {
       </div>
       <div className="flex w-[50%] justify-between">
         <div>
-          <h1>$20,151.91</h1>
-          <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
+          <h1 className="font-[600]">${data.presentBalance}</h1>
+          <p className=" text-[12px] border-b border-dashed border-gray-500 w-fit">
             Present balance
           </p>
         </div>
         <div>
-          <h1>$0</h1>
+          <h1 className="font-[600]">${data.availableBalance}</h1>
           <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
-            Present balance
+            Available credit
           </p>
         </div>
         <div>
-          <h1>$0</h1>
+          <h1 className="font-[600]">
+            ${data.availableBalance + data.availableCredit}
+          </h1>
           <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
-            Present balance
+            Available plus credit
           </p>
         </div>
       </div>
