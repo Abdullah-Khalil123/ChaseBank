@@ -4,8 +4,11 @@ import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
@@ -57,6 +60,7 @@ export default function LoginForm() {
       }
 
       console.log(credentials);
+      router.push("/overview");
     }
   };
 

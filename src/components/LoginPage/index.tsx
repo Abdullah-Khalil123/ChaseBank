@@ -1,5 +1,5 @@
 import React from "react";
-import LoginHeader from "./loginHeader";
+import LoginHeader from "../partials/loginHeader";
 import Footer from "../partials/footer";
 import Image from "next/image";
 import LoginForm from "./LoginForm";
