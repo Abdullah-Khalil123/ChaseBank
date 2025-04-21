@@ -79,7 +79,7 @@ const OverviewLinkOptions = () => {
     <div className="bg-white text-[#475969] flex items-center gap-4 h-14 px-6">
       {links.map((link, index) => (
         <div
-          className={`rounded-[10px] border-2 p-1 px-2 cursor-pointer ${
+          className={`rounded-[10px] border-1 py-[2px] px-2 cursor-pointer ${
             link === selectedLink
               ? "bg-[#ebeff3] text-[#0d5fb6] border-[#0d5fb6]"
               : "border-transparent"

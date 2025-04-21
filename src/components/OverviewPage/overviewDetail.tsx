@@ -1,7 +1,7 @@
 import React from "react";
 
 const OverviewDetail = () => {
-  return <div>OverviewDetail</div>;
+  return <div></div>;
 };
 
 export default OverviewDetail;
