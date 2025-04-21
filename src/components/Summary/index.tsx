@@ -14,7 +14,7 @@ const SummaryPage = () => {
     <div>
       <BalanceDetail />
       <div className="flex justify-center">
-        <div className="w-[1024px]">
+        <div className="w-[1024px] ">
           <UncollectedFunds />
           <UpgradeCheckout
             head="Put cash flow tools at your fingertips"
@@ -24,7 +24,7 @@ const SummaryPage = () => {
             className="items-center"
           />
 
-          <h3 className="my-4 font-[600]">Transactions</h3>
+          <h3 className="my-4 font-[600] max-lg:ml-4">Transactions</h3>
           <TransactionsTable />
         </div>
       </div>
@@ -67,7 +67,7 @@ const BalanceDetail = () => {
     <div className="bg-white pb-6">
       <OverviewHeader showOptions={false} />
       <div className="flex justify-center">
-        <div className="w-[1024px]">
+        <div className="w-[1024px] mx-screen-x">
           <BreadCrumb />
           <Divider />
           <p className="text-[14px]">{data.accountTitle}</p>
@@ -76,7 +76,7 @@ const BalanceDetail = () => {
           <div className="mt-4" />
           <Divider />
           <div className="mt-6" />
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap max-md:justify-center">
             <Button>Statements</Button>
             <Button>Paperless</Button>
             <Button>Accept card payments</Button>
@@ -94,16 +94,18 @@ const BalanceDetail = () => {
 const Balance = ({ data }: { data: BalanceData }) => {
   return (
     <div>
-      <div className="flex justify-between items-start font-[600] pt-4">
+      <div className="flex flex-wrap gap-2 pb-2 justify-between items-start font-[600] pt-4">
         <div className="mb-4">
           <h1 className="text-4xl">{data.availableBalance}</h1>
           <p className="text-[12px] font-normal border-b border-dashed border-gray-500 w-fit">
             Available balance
           </p>
         </div>
-        <AccountButton />
+        <div className="flex max-md:justify-center w-full">
+          <AccountButton />
+        </div>
       </div>
-      <div className="flex w-[50%] justify-between">
+      <div className="flex flex-wrap gap-2 w-[50%] justify-between">
         <div>
           <h1 className="font-[600]">${data.presentBalance}</h1>
           <p className=" text-[12px] border-b border-dashed border-gray-500 w-fit">

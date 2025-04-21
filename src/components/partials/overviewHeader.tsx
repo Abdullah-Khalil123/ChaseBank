@@ -12,7 +12,7 @@ const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
       <div className="h-[60px] flex justify-between items-center px-screen-x max-w-[1440px] mx-auto">
         <div className="flex items-center gap-4">
           <Menu color="white" />
-          <div className="relative w-[220px] h-[32px]">
+          <div className="relative w-[220px] h-[32px] max-lg:hidden">
             <Image alt="Chase Logo" src={ChaseLogo} fill />
           </div>
         </div>
@@ -21,7 +21,7 @@ const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
           <Search className={IconClassName} size={20} />
           <FlagIcon className={IconClassName} size={20} />
           <UserCircle className={IconClassName} size={20} />
-          <button className="bg-white text-[#0d5fb6] px-2 rounded-[5px] text-[14px]">
+          <button className="bg-white text-[#0d5fb6] px-2 rounded-[5px] text-[14px] max-lg:hidden">
             Open an account
           </button>
           <button className="text-[12px] font-bold">Sign out</button>
@@ -46,7 +46,7 @@ const OverviewLinks = () => {
   const [activeLink, setActiveLink] = useState("Accounts");
   return (
     <>
-      <div className="flex gap-4 py-2 px-screen-x max-w-[1440px] mx-auto">
+      <div className="flex gap-4 py-2 px-screen-x max-w-[1440px] mx-auto max-lg:hidden">
         {Links.map((link, index) => (
           <div
             key={index}
@@ -76,7 +76,7 @@ const OverviewLinkOptions = () => {
   const [selectedLink, setSelectedLink] = useState("Overview");
 
   return (
-    <div className="bg-white text-[#475969] h-14">
+    <div className="bg-white text-[#475969] h-14 max-lg:hidden">
       <div className="flex items-center gap-4 h-full max-w-[1440px] px-screen-x mx-auto">
         {links.map((link, index) => (
           <div

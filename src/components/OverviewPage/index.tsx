@@ -23,7 +23,7 @@ const OverviewPage = () => {
       <OverviewDetail />
 
       <div className="flex justify-center">
-        <div className="flex max-w-[1440px]">
+        <div className="flex max-w-[1440px] max-lg:flex-col gap-6">
           <div className="flex flex-col gap-6 px-screen-x py-screen-y">
             {/* <h2 className="text-[24px] font-bold">{getGreeting()}</h2> */}
             <BankAccount />
@@ -36,7 +36,7 @@ const OverviewPage = () => {
               tag="Get $100 off Chase POS™ Terminal — our fast, reliable wireless terminal to take payments and track sales. Plus, get no-fee, same-day deposits."
             />
           </div>
-          <div className="flex flex-col py-screen-y pr-screen-x gap-6">
+          <div className="flex flex-col lg:py-screen-y pr-screen-x max-lg:pl-screen-x gap-6">
             <CustomerInsight />
             <ExploreBusiness />
             <HelpSupport />
@@ -44,7 +44,7 @@ const OverviewPage = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="max-w-[1440px]">
+        <div className="max-w-[1440px] max-lg:pt-4">
           <Disclosure />
         </div>
       </div>

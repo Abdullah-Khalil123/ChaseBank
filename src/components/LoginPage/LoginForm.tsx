@@ -79,7 +79,7 @@ export default function LoginForm() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-white p-8 rounded shadow-md w-full min-w-[414px]">
+      <div className="bg-white p-8 rounded shadow-md w-full lg:min-w-[414px] ">
         <form onSubmit={handleSubmit}>
           <div className="mb-6 relative">
             <label

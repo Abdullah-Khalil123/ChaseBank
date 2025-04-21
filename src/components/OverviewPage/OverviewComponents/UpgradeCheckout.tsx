@@ -22,7 +22,7 @@ const UpgradeCheckout = ({
         className
       }
     >
-      <div className="w-[90px] h-[90px]">
+      <div className="w-[90px] h-[90px] max-lg:h-[140px]">
         <Image alt="" src={image} width={90} height={90} />
       </div>
       <div className="flex flex-col justify-between h-[80px]">

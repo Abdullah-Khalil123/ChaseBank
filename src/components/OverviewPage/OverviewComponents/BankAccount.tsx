@@ -49,14 +49,14 @@ const BankAccount = () => {
       </h3>
 
       <div>
-        <div className="flex justify-between items-center text-[#0d5fb6] font-[600] px-4 pt-4">
+        <div className="lg:flex justify-between items-center text-[#0d5fb6] font-[600] px-4 pt-4">
           <Link
             href={"/summary"}
-            className="flex hover:bg-[#ebeff3] px-2 py-1 rounded-[5px] cursor-pointer items-center"
+            className="flex hover:bg-[#ebeff3] max-lg:mb-2 px-2 py-1 rounded-[5px] cursor-pointer items-center"
           >
             {data.accountTitle} <ChevronRight />
           </Link>
-          <div className="flex">
+          <div className="flex max-lg:justify-center">
             <button className="bg-[#002f6c] text-white text-[14px] font-bold px-2 rounded-[5px]">
               Transfer money
             </button>
@@ -66,7 +66,7 @@ const BankAccount = () => {
           </div>
         </div>
 
-        <div className="flex items-end gap-10 px-4 py-4">
+        <div className="flex items-end gap-10 px-4 py-4 flex-wrap">
           <div>
             <h1 className="text-4xl font-[600]">${data.availableBalance}</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">

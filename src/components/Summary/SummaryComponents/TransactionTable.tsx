@@ -1,16 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Search, SlidersHorizontal, Printer, Download } from "lucide-react";
 import { transactions as initialTransactions } from "../data";
 
 export default function TransactionsTable() {
   const [transactions] = useState(initialTransactions);
-
-  //   const toggleExpand = (index: any) => {
-  //     const newTransactions = [...transactions];
-  //     newTransactions[index].expanded = !newTransactions[index].expanded;
-  //     setTransactions(newTransactions);
-  //   };
 
   const shouldShowDate = (index: number) => {
     if (index === 0) return true;
@@ -32,19 +27,19 @@ export default function TransactionsTable() {
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-black">
-                  <th className="px-6 py-3 text-left text-[13px] uppercase ">
+                  <th className="px-6 py-3 text-left text-[13px] uppercase max-lg:hidden">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-[13px] uppercase ">
+                  <th className="px-6 py-3 text-left text-[13px] uppercase">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left text-[13px] uppercase ">
+                  <th className="px-6 py-3 text-left text-[13px] uppercase max-lg:hidden">
                     Type
                   </th>
                   <th className="px-6 py-3 text-right text-[13px] uppercase ">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-right text-[13px] uppercase ">
+                  <th className="px-6 py-3 text-right text-[13px] uppercase max-lg:hidden">
                     Balance
                   </th>
                   <th className="px-6 py-3 text-right text-[13px] uppercase "></th>
@@ -64,11 +59,11 @@ export default function TransactionsTable() {
                         isLastInDateGroup ? "border-b border-black" : ""
                       }`}
                     >
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-lg:hidden">
                         {shouldShowDate(index) ? transaction.date : ""}
                       </td>
                       <td
-                        className={`px-6 py-4 text-sm text-gray-900 ${
+                        className={`px-6 py-4 text-sm text-gray-900 max-lg:max-w-[100px] ${
                           !isLastInDateGroup
                             ? "border-b border-dashed border-gray-500"
                             : ""
@@ -77,7 +72,7 @@ export default function TransactionsTable() {
                         {transaction.description}
                       </td>
                       <td
-                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-gray-900 ${
+                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-lg:hidden ${
                           !isLastInDateGroup
                             ? "border-b border-dashed border-gray-500"
                             : ""
@@ -97,7 +92,7 @@ export default function TransactionsTable() {
                         {transaction.amount}
                       </td>
                       <td
-                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 ${
+                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 max-lg:hidden ${
                           !isLastInDateGroup
                             ? "border-b border-dashed border-gray-500"
                             : ""
@@ -140,8 +135,6 @@ export default function TransactionsTable() {
     </div>
   );
 }
-
-import { Search, SlidersHorizontal, Printer, Download } from "lucide-react";
 
 export function TransactionFilterBar() {
   return (
