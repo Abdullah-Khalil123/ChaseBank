@@ -27,7 +27,7 @@ const ExploreBusiness = () => {
               width={95 - 50}
               height={88 - 60}
             />
-            <p className="text-[14px] text-blue text-center">{product.name}</p>
+            <p className="text-sm text-blue text-center">{product.name}</p>
           </div>
         ))}
       </div>

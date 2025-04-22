@@ -6,14 +6,14 @@ import AccountButton from "./AccountButton";
 const BankInfoSummary = () => {
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
-      <div className="text-[14px] font-bold text-gray-700 flex justify-between px-4 py-3">
+      <div className="text-sm font-bold text-gray-700 flex justify-between px-4 py-3">
         <h1>Bank account</h1>
         <div className="flex text-[#0a4386]">
           <Printer size={20} />
           <ChevronUp className="ml-2" />
         </div>
       </div>
-      <h3 className="bg-[#f5f7fa] py-2 font-bold text-[14px] px-4 border-t-1 border-gray-300">
+      <h3 className="bg-[#f5f7fa] py-2 font-bold text-sm px-4 border-t-1 border-gray-300">
         TIGER PRODUCT INC.
       </h3>
       <div>

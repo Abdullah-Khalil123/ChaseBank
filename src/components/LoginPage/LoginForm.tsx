@@ -175,10 +175,7 @@ export default function LoginForm() {
                 onChange={() => setRememberMe(!rememberMe)}
                 className="mr-2 size-5"
               />
-              <label
-                htmlFor="remember-me"
-                className="text-gray-700 text-[14px]"
-              >
+              <label htmlFor="remember-me" className="text-gray-700 text-sm">
                 Remember me
               </label>
             </div>
@@ -191,7 +188,7 @@ export default function LoginForm() {
                 onChange={(e) => handleTokenChange(e.target.checked)}
                 className="mr-2 size-5"
               />
-              <label htmlFor="use-token" className="text-gray-700 text-[14px]">
+              <label htmlFor="use-token" className="text-gray-700 text-sm">
                 Use token
               </label>
             </div>
@@ -207,14 +204,14 @@ export default function LoginForm() {
           <div className="mt-6 space-y-2">
             <Link
               href="/forgot-password"
-              className="text-blue-500 hover:underline flex items-center text-[14px]"
+              className="text-blue-500 hover:underline flex items-center text-sm"
             >
               Forgot username/password?{" "}
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
             <Link
               href="/signup"
-              className="text-blue-500 hover:underline flex items-center text-[14px]"
+              className="text-blue-500 hover:underline flex items-center text-sm"
             >
               Not Enrolled? Sign Up Now.{" "}
               <ChevronRight className="h-4 w-4 ml-1" />

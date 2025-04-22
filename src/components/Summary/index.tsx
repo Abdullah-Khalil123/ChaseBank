@@ -14,7 +14,7 @@ const SummaryPage = () => {
     <div>
       <BalanceDetail />
       <div className="flex justify-center">
-        <div className="w-[1024px] ">
+        <div className="w-[968px] ">
           <UncollectedFunds />
           <UpgradeCheckout
             head="Put cash flow tools at your fingertips"
@@ -67,10 +67,10 @@ const BalanceDetail = () => {
     <div className="bg-white pb-6">
       <OverviewHeader showOptions={false} />
       <div className="flex justify-center">
-        <div className="w-[1024px] mx-screen-x">
+        <div className="w-[968px] mx-screen-x">
           <BreadCrumb />
           <Divider />
-          <p className="text-[14px]">{data.accountTitle}</p>
+          <p className="text-sm">{data.accountTitle}</p>
           <p className="text-[12px] text-gray-600">{data.name}</p>
           <Balance data={data} />
           <div className="mt-4" />
@@ -96,8 +96,8 @@ const Balance = ({ data }: { data: BalanceData }) => {
     <div>
       <div className="flex justify-between gap-2 pb-2 items-start font-[600] pt-4">
         <div className="mb-4">
-          <h1 className="text-4xl">{data.availableBalance}</h1>
-          <p className="text-[12px] font-normal border-b border-dashed border-gray-500 w-fit">
+          <h1 className="text-4xl">${data.availableBalance}</h1>
+          <p className="text-sm font-normal border-b border-dashed border-gray-500 w-fit">
             Available balance
           </p>
         </div>
@@ -108,21 +108,19 @@ const Balance = ({ data }: { data: BalanceData }) => {
       <div className="flex">
         <div className="w-[218px]">
           <h1 className="font-[600]">${data.presentBalance}</h1>
-          <p className=" text-[14px] border-b border-dashed border-gray-500 w-fit">
+          <p className=" text-sm border-b border-dashed border-gray-500 w-fit">
             Present balance
           </p>
         </div>
         <div className="w-[218px]">
           <h1 className="font-[600]">${data.availableBalance}</h1>
-          <p className="text-[14px] w-fit text-gray-text">Available credit</p>
+          <p className="text-sm w-fit text-gray-text">Available credit</p>
         </div>
         <div className="w-[218px]">
           <h1 className="font-[600]">
             ${data.availableBalance + data.availableCredit}
           </h1>
-          <p className="text-[14px] w-fit text-gray-text">
-            Available plus credit
-          </p>
+          <p className="text-sm w-fit text-gray-text">Available plus credit</p>
         </div>
       </div>
     </div>

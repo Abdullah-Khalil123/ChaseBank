@@ -20,7 +20,7 @@ const Disclosure = () => {
         in all states.
       </p>
 
-      <div className="text-[14px] border-1 border-gray-300 px-4 py-5 text-[#414042]">
+      <div className="text-sm border-1 border-gray-300 px-4 py-5 text-[#414042]">
         <p>INVESTMENT AND INSURANCE PRODUCTS ARE:</p>
         <ul className="list-disc list-inside">
           <li> NOT FDIC INSURED</li>

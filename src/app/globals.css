@@ -17,6 +17,8 @@
   --color-gray-text: #5b6c7b;
   --color-blue-button-text: #005eb8;
 
+  --text-sm: 14px;
+
   --spacing-screen-x: 40px;
   --spacing-screen-y: 20px;
 }

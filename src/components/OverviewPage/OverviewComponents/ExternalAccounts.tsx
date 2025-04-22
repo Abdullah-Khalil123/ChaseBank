@@ -13,7 +13,7 @@ const ExternalAccounts = () => {
           Link your external accounts to better organize your money, budget and
           plan for the future.
         </p>
-        <button className="text-[14px] font-[600] border-[1px] border-[#025fb9] w-fit px-2 rounded-[3px] text-[#1f72c1]">
+        <button className="text-sm font-[600] border-[1px] border-[#025fb9] w-fit px-2 rounded-[3px] text-[#1f72c1]">
           Link account
         </button>
       </div>

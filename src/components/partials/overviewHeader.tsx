@@ -21,7 +21,7 @@ const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
           <Search className={IconClassName} size={20} />
           <FlagIcon className={IconClassName} size={20} />
           <UserCircle className={IconClassName} size={20} />
-          <button className="bg-white text-[#0d5fb6] px-2 rounded-[5px] text-[14px] max-lg:hidden">
+          <button className="bg-white text-[#0d5fb6] px-2 rounded-[5px] text-sm max-lg:hidden">
             Open an account
           </button>
           <button className="text-[12px] font-bold">Sign out</button>
