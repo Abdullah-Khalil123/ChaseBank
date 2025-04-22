@@ -19,6 +19,8 @@
 
   --text-sm: 14px;
 
+  --font-weight-bold: 600;
+
   --spacing-screen-x: 40px;
   --spacing-screen-y: 20px;
 }

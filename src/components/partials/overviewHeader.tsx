@@ -50,7 +50,7 @@ const OverviewLinks = () => {
         {Links.map((link, index) => (
           <div
             key={index}
-            className="relative text-[16px] font-[600] hover:bg-[#00275b] px-1 rounded-[5px] cursor-pointer"
+            className="relative text-[16px] font-bold hover:bg-[#00275b] px-1 rounded-[5px] cursor-pointer"
             onClick={() => setActiveLink(link)}
           >
             {link}
@@ -80,7 +80,7 @@ const OverviewLinkOptions = () => {
       <div className="flex items-center gap-4 h-full max-w-[1440px] px-screen-x mx-auto">
         {links.map((link, index) => (
           <div
-            className={`rounded-[10px] text-sm font-[600] border-1 py-[2px] px-2 cursor-pointer ${
+            className={`rounded-[10px] text-sm font-bold border-1 py-[2px] px-2 cursor-pointer ${
               link === selectedLink
                 ? "bg-[#ebeff3] text-[#0d5fb6] border-[#0d5fb6]"
                 : "border-transparent"

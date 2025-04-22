@@ -23,7 +23,7 @@ const OverviewPage = () => {
       <OverviewDetail />
 
       <div className="flex justify-center">
-        <div className="flex max-w-[1440px] max-lg:flex-col gap-6">
+        <div className="flex max-w-[1416px] max-lg:flex-col gap-6">
           <div className="flex flex-col gap-6 pl-screen-x py-screen-y">
             {/* <h2 className="text-[24px] font-bold">{getGreeting()}</h2> */}
             <BankAccount />

@@ -81,7 +81,7 @@ export default function TransactionsTable() {
                         {transaction.type}
                       </td>
                       <td
-                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-right font-[600] ${getAmountColor(
+                        className={`align-top px-6 py-4 whitespace-nowrap text-sm text-right font-bold ${getAmountColor(
                           transaction.amount
                         )} ${
                           !isLastInDateGroup

@@ -14,7 +14,7 @@ const ExploreBusiness = () => {
   ];
   return (
     <div className="bg-white px-4 py-4 border-1 border-gray-300 rounded-[10px]">
-      <h1 className="mb-4 font-[600]">Explore business products</h1>
+      <h1 className="mb-4 font-bold">Explore business products</h1>
       <div className="grid grid-cols-[repeat(auto-fill,_minmax(95px,_1fr))]">
         {Products.map((product, index) => (
           <div

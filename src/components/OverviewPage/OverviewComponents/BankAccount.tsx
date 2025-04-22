@@ -36,7 +36,7 @@ const BankAccount = () => {
 
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
-      <div className="text-sm font-bold text-gray-700 flex justify-between px-4 py-3">
+      <div className="font-bold text-gray-700 flex justify-between px-4 py-3">
         <h1>Bank account</h1>
         <div className="flex text-[#0a4386]">
           <Printer size={20} />
@@ -44,12 +44,12 @@ const BankAccount = () => {
         </div>
       </div>
 
-      <h3 className="bg-[#f5f7fa] py-2 font-bold text-sm px-4 border-t-1 border-gray-300 uppercase">
+      <h3 className="bg-[#f5f7fa] py-2 font-bold px-4 border-t-1 border-gray-300 uppercase">
         {data.name}
       </h3>
 
       <div>
-        <div className="lg:flex justify-between items-center text-blue font-[600] px-4 pt-4">
+        <div className="lg:flex justify-between items-center text-blue font-bold px-4 pt-4">
           <Link
             href={"/summary"}
             className="flex hover:bg-[#ebeff3] max-lg:mb-2 px-2 py-1 rounded-[5px] cursor-pointer items-center"
@@ -57,7 +57,7 @@ const BankAccount = () => {
             {data.accountTitle} <ChevronRight />
           </Link>
           <div className="flex max-lg:justify-center">
-            <button className="bg-darkBlue text-white text-sm font-[600] px-2 rounded-[5px]">
+            <button className="bg-darkBlue text-white text-sm font-bold px-2 rounded-[5px]">
               Transfer money
             </button>
             <button className="flex items-center border-[1px] rounded-[5px] pl-2 pr-1 font-[12px] ml-4">
@@ -68,14 +68,14 @@ const BankAccount = () => {
 
         <div className="flex items-end gap-10 px-4 py-4 flex-wrap">
           <div className="grow-[1]">
-            <h1 className="text-4xl font-[600]">${data.availableBalance}</h1>
+            <h1 className="text-4xl font-bold">${data.availableBalance}</h1>
             <p className="text-sm border-b border-dashed border-gray-500 w-fit">
               Available balance
             </p>
           </div>
 
           <div>
-            <h1 className="font-[600] w-[180px] text-[18px]">
+            <h1 className="font-bold w-[180px] text-[18px]">
               ${data.presentBalance}
             </h1>
             <p className="text-sm border-b border-dashed border-gray-500 w-fit">
@@ -84,7 +84,7 @@ const BankAccount = () => {
           </div>
 
           <div>
-            <h1 className="font-[600] w-[180px] text-[18px]">
+            <h1 className="font-bold w-[180px] text-[18px]">
               ${data.availableCredit}
             </h1>
             <p className="text-sm w-fit">Available credit</p>

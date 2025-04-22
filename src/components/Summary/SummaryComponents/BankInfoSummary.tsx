@@ -17,7 +17,7 @@ const BankInfoSummary = () => {
         TIGER PRODUCT INC.
       </h3>
       <div>
-        <div className="flex justify-between items-center text-[#0d5fb6] font-[600] px-4 pt-4">
+        <div className="flex justify-between items-center text-[#0d5fb6] font-bold px-4 pt-4">
           <Link
             href={"/summary"}
             className="flex hover:bg-[#ebeff3] px-2 py-1 rounded-[5px] cursor-pointer items-center"
@@ -28,7 +28,7 @@ const BankInfoSummary = () => {
         </div>
         <div className="flex items-end justify-between w-[50%] px-4 py-4">
           <div>
-            <h1 className="text-4xl font-[600]">$20,151.91</h1>
+            <h1 className="text-4xl font-bold">$20,151.91</h1>
             <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
               Available balance
             </p>
