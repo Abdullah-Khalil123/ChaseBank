@@ -36,8 +36,8 @@ const BankAccount = () => {
 
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
-      <div className="font-bold text-gray-700 flex justify-between px-4 py-3">
-        <h1>Bank account</h1>
+      <div className="font-bold flex justify-between px-4 py-3">
+        <h1>Bank accounts</h1>
         <div className="flex text-[#0a4386]">
           <Printer size={20} />
           <ChevronUp className="ml-2" />

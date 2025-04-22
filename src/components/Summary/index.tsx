@@ -38,7 +38,7 @@ const InfoCard = [
 ];
 
 const SummaryPage = () => {
-  const [cardData, setcardData] = useState(
+  const [cardData] = useState(
     InfoCard[Math.floor(Math.random() * InfoCard.length)]
   );
 
