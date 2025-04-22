@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import OverviewHeader from "../partials/overviewHeader";
 import OverviewDetail from "./overviewDetail";
 import BankAccount from "./OverviewComponents/BankAccount";
@@ -10,6 +12,21 @@ import CustomerInsight from "./OverviewComponents/CustomerInsight";
 import HelpSupport from "./OverviewComponents/HelpSupport";
 import ExploreBusiness from "./OverviewComponents/ExploreBusiness";
 
+const InfoCard = [
+  {
+    img: "/save.jpg",
+    head: "Upgrade your checkout",
+    tag: "Get $100 off Chase POS™ Terminal — our fast, reliable wireless terminal to take payments and track sales. Plus, get no-fee, same-day deposits.",
+    button: "Continue",
+  },
+  {
+    img: "/quickAccept.avif",
+    head: "You have access to QuickAccept",
+    tag: "Accept credit cards on the go and get no-fee, same-day deposits- No hardware required- Get started today-",
+    button: "Continue",
+  },
+];
+
 const OverviewPage = () => {
   // const getGreeting = () => {
   //   const hour = new Date().getHours();
@@ -17,6 +34,10 @@ const OverviewPage = () => {
   //   if (hour < 18) return "Good afternoon";
   //   return "Good evening";
   // };
+
+  const [InfoCardSelect] = useState(
+    InfoCard[Math.floor(Math.random() * InfoCard.length)]
+  );
   return (
     <div>
       <OverviewHeader showOptions />
@@ -30,10 +51,10 @@ const OverviewPage = () => {
             <PendingApprovals />
             <ExternalAccounts />
             <UpgradeCheckout
-              button="Continue"
-              head="Upgrade your checkout"
-              image="/save.jpg"
-              tag="Get $100 off Chase POS™ Terminal — our fast, reliable wireless terminal to take payments and track sales. Plus, get no-fee, same-day deposits."
+              button={InfoCardSelect.button}
+              head={InfoCardSelect.head}
+              image={InfoCardSelect.img}
+              tag={InfoCardSelect.tag}
             />
           </div>
           <div className="flex flex-col py-[36px] pr-[4px] max-lg:pl-screen-x gap-6">
