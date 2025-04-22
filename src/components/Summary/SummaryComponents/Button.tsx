@@ -10,7 +10,7 @@ const Button = ({
   return (
     <div
       className={
-        `w-[200px] flex justify-center border-[1px] rounded-[5px] border-[#0d5fb6] text-[#0d5fb6] font-[600] text-[15px] px-4 py-1 hover:bg-[#ecf0f6] cursor-pointer ` +
+        `text-nowrap min-w-[160px] flex justify-center border-[1px] rounded-[5px] border-[#0d5fb6] text-blue-button-text font-[600] px-4 py-[6px] hover:bg-[#ecf0f6] cursor-pointer ` +
         className
       }
     >

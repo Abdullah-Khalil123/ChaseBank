@@ -26,9 +26,9 @@ const UpgradeCheckout = ({
         <Image alt="" src={image} width={90} height={90} />
       </div>
       <div className="flex flex-col justify-between h-[80px]">
-        <h1 className="text-[14px] font-bold">{head}</h1>
-        <p className="text-[15px] text-gray-500">{tag}</p>
-        <p className="flex items-center text-[#3c84c9] text-[14px]">
+        <h1 className="font-[600]">{head}</h1>
+        <p className="text-[14px] text-gray-text">{tag}</p>
+        <p className="flex items-center text-blue text-[14px]">
           {button} <ChevronRight size={20} />
         </p>
       </div>

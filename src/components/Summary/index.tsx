@@ -94,35 +94,33 @@ const BalanceDetail = () => {
 const Balance = ({ data }: { data: BalanceData }) => {
   return (
     <div>
-      <div className="flex flex-wrap gap-2 pb-2 justify-between items-start font-[600] pt-4">
+      <div className="flex justify-between gap-2 pb-2 items-start font-[600] pt-4">
         <div className="mb-4">
           <h1 className="text-4xl">{data.availableBalance}</h1>
           <p className="text-[12px] font-normal border-b border-dashed border-gray-500 w-fit">
             Available balance
           </p>
         </div>
-        <div className="flex max-md:justify-center w-full">
+        <div className="flex">
           <AccountButton />
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 w-[50%] justify-between">
-        <div>
+      <div className="flex">
+        <div className="w-[218px]">
           <h1 className="font-[600]">${data.presentBalance}</h1>
-          <p className=" text-[12px] border-b border-dashed border-gray-500 w-fit">
+          <p className=" text-[14px] border-b border-dashed border-gray-500 w-fit">
             Present balance
           </p>
         </div>
-        <div>
+        <div className="w-[218px]">
           <h1 className="font-[600]">${data.availableBalance}</h1>
-          <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
-            Available credit
-          </p>
+          <p className="text-[14px] w-fit text-gray-text">Available credit</p>
         </div>
-        <div>
+        <div className="w-[218px]">
           <h1 className="font-[600]">
             ${data.availableBalance + data.availableCredit}
           </h1>
-          <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
+          <p className="text-[14px] w-fit text-gray-text">
             Available plus credit
           </p>
         </div>
