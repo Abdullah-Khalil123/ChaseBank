@@ -3,7 +3,7 @@ import React from "react";
 const Disclosure = () => {
   return (
     <div className="px-screen-x mb-4">
-      <p className="text-[12px]">Disclosures</p>
+      <p className="text-[12px] mb-[42px]">Disclosures</p>
       <p className="text-[12px] text-gray-800 mb-4">
         <span className="font-bold">JPMorgan Chase Bank, N.A.</span> and its
         affiliates (collectively “JPMCB”) offer investment products, which may
@@ -20,7 +20,7 @@ const Disclosure = () => {
         in all states.
       </p>
 
-      <div className="text-[14px] border-1 border-gray-300 px-4 py-5 text-gray-600">
+      <div className="text-[14px] border-1 border-gray-300 px-4 py-5 text-[#414042]">
         <p>INVESTMENT AND INSURANCE PRODUCTS ARE:</p>
         <ul className="list-disc list-inside">
           <li> NOT FDIC INSURED</li>

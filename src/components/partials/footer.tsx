@@ -13,7 +13,7 @@ const Footer = () => {
   const IconClassName = "opacity-75 hover:text-blue-600 hover:opacity-100";
   return (
     <div className="bg-white flex flex-col items-center gap-4 py-4 ">
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-center items-center gap-4 ">
         <p className="text-gray-600">Follow us:</p>
         <Facebook size={IconSize} className={IconClassName} />
         <Instagram size={IconSize} className={IconClassName} />
@@ -28,13 +28,13 @@ const Footer = () => {
 };
 
 const Section = () => {
-  return <div className="h-[1px] w-[90%] bg-gray-600"></div>;
+  return <div className="h-[1px] w-[1140px] bg-gray-300"></div>;
 };
 
 const FooterLinks = () => {
   return (
-    <div className="[1024px]:max-w-[720px] bg-white text-gray-600 text-sm text-center py-6 space-y-3">
-      <div className="flex flex-wrap justify-center gap-4 underline">
+    <div className="[1024px]:max-w-[720px] w-[1140px] bg-white text-gray-600 text-sm text-center py-4 space-y-3">
+      <div className="flex flex-wrap justify-center gap-4 underline text-[10.5px]">
         <a href="#">Contact us</a>
         <a href="#">Privacy</a>
         <a href="#">Security</a>
@@ -50,15 +50,15 @@ const FooterLinks = () => {
         <a href="#">Chase Canada</a>
         <a href="#">Site map</a>
         <a href="#">Member FDIC</a>
-      </div>
-      <div className="flex flex-col items-center space-y-1 mt-2">
         <div className="flex items-center gap-1">
           <span>
-            <HouseIcon size={16} />
+            <HouseIcon size={12} />
           </span>
           <span>Equal Housing Opportunity</span>
         </div>
-        <p className="text-xs">&copy; 2025 JPMorgan Chase & Co.</p>
+      </div>
+      <div className="flex flex-col items-center space-y-1 mt-2 text-[10.5px]">
+        <p className="text-[10.5px] mt-4">&copy; 2025 JPMorgan Chase & Co.</p>
       </div>
     </div>
   );

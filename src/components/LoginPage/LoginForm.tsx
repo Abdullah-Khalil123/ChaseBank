@@ -79,7 +79,7 @@ export default function LoginForm() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-white p-8 rounded shadow-md w-full lg:min-w-[414px] ">
+      <div className="bg-white p-8 rounded shadow-md w-[384px] h-[391px]">
         <form onSubmit={handleSubmit}>
           <div className="mb-6 relative">
             <label
@@ -173,9 +173,12 @@ export default function LoginForm() {
                 id="remember-me"
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
-                className="mr-2"
+                className="mr-2 size-5"
               />
-              <label htmlFor="remember-me" className="text-gray-700">
+              <label
+                htmlFor="remember-me"
+                className="text-gray-700 text-[14px]"
+              >
                 Remember me
               </label>
             </div>
@@ -186,9 +189,9 @@ export default function LoginForm() {
                 id="use-token"
                 checked={useToken}
                 onChange={(e) => handleTokenChange(e.target.checked)}
-                className="mr-2"
+                className="mr-2 size-5"
               />
-              <label htmlFor="use-token" className="text-gray-700">
+              <label htmlFor="use-token" className="text-gray-700 text-[14px]">
                 Use token
               </label>
             </div>
@@ -204,14 +207,14 @@ export default function LoginForm() {
           <div className="mt-6 space-y-2">
             <Link
               href="/forgot-password"
-              className="text-blue-500 hover:underline flex items-center"
+              className="text-blue-500 hover:underline flex items-center text-[14px]"
             >
               Forgot username/password?{" "}
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
             <Link
               href="/signup"
-              className="text-blue-500 hover:underline flex items-center"
+              className="text-blue-500 hover:underline flex items-center text-[14px]"
             >
               Not Enrolled? Sign Up Now.{" "}
               <ChevronRight className="h-4 w-4 ml-1" />

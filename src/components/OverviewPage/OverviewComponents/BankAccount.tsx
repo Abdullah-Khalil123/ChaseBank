@@ -49,7 +49,7 @@ const BankAccount = () => {
       </h3>
 
       <div>
-        <div className="lg:flex justify-between items-center text-[#0d5fb6] font-[600] px-4 pt-4">
+        <div className="lg:flex justify-between items-center text-blue font-[600] px-4 pt-4">
           <Link
             href={"/summary"}
             className="flex hover:bg-[#ebeff3] max-lg:mb-2 px-2 py-1 rounded-[5px] cursor-pointer items-center"
@@ -57,7 +57,7 @@ const BankAccount = () => {
             {data.accountTitle} <ChevronRight />
           </Link>
           <div className="flex max-lg:justify-center">
-            <button className="bg-[#002f6c] text-white text-[14px] font-bold px-2 rounded-[5px]">
+            <button className="bg-darkBlue text-white text-[14px] font-[600] px-2 rounded-[5px]">
               Transfer money
             </button>
             <button className="flex items-center border-[1px] rounded-[5px] pl-2 pr-1 font-[12px] ml-4">
@@ -67,25 +67,27 @@ const BankAccount = () => {
         </div>
 
         <div className="flex items-end gap-10 px-4 py-4 flex-wrap">
-          <div>
+          <div className="grow-[1]">
             <h1 className="text-4xl font-[600]">${data.availableBalance}</h1>
-            <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
+            <p className="text-[14px] border-b border-dashed border-gray-500 w-fit">
               Available balance
             </p>
           </div>
 
           <div>
-            <h1>${data.presentBalance}</h1>
-            <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
+            <h1 className="font-[600] w-[180px] text-[18px]">
+              ${data.presentBalance}
+            </h1>
+            <p className="text-[14px] border-b border-dashed border-gray-500 w-fit">
               Present balance
             </p>
           </div>
 
           <div>
-            <h1>${data.availableCredit}</h1>
-            <p className="text-[12px] border-b border-dashed border-gray-500 w-fit">
-              Available credit
-            </p>
+            <h1 className="font-[600] w-[180px] text-[18px]">
+              ${data.availableCredit}
+            </h1>
+            <p className="text-[14px] w-fit">Available credit</p>
           </div>
         </div>
       </div>
