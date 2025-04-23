@@ -5,7 +5,7 @@ import BreadCrumb from "./SummaryComponents/BreadCrumb";
 import Divider from "./SummaryComponents/Divider";
 import AccountButton from "./SummaryComponents/AccountButton";
 import OverviewHeader from "../partials/overviewHeader";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Printer } from "lucide-react";
 import UpgradeCheckout from "../OverviewPage/OverviewComponents/UpgradeCheckout";
 import TransactionsTable from "./SummaryComponents/TransactionTable";
 import { useAuth } from "@/providers/AuthProvider";
@@ -158,6 +158,7 @@ const BalanceDetail = () => {
               <Balance
                 balance={userData.balance}
                 availableCredit={userData.availableCredit}
+                user={userData}
               />
             </>
           )}
@@ -182,9 +183,10 @@ const BalanceDetail = () => {
 interface BalanceProps {
   balance: number;
   availableCredit: number;
+  user: UserData | null;
 }
 
-const Balance = ({ balance, availableCredit }: BalanceProps) => {
+const Balance = ({ balance, availableCredit, user }: BalanceProps) => {
   // Format numbers for display
   const formatCurrency = (value: number) => {
     return value.toLocaleString("en-US", {
@@ -208,7 +210,8 @@ const Balance = ({ balance, availableCredit }: BalanceProps) => {
           </p>
         </div>
         <div className="flex">
-          <AccountButton />
+          {/* <AccountButton /> */}
+          <AccountInfoModal user={user} />
         </div>
       </div>
       <div className="flex">
@@ -243,3 +246,82 @@ const UncollectedFunds = () => {
 };
 
 export default SummaryPage;
+
+// Modal component that displays account and routing information
+export function AccountInfoModal({ user }: { user: UserData | null }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      {/* Account Button that triggers the modal */}
+      <button onClick={toggleModal} className="px-4 py-2 text-white rounded">
+        <AccountButton />
+      </button>
+
+      {/* Modal overlay - only visible when isOpen is true */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black-opacity-40 flex items-center justify-center z-50">
+          {/* Modal card */}
+          <div className="bg-white rounded-md w-full max-w-[860px] mx-4">
+            {/* Header */}
+            <div className="p-6 border-b border-gray-200">
+              <h2 className="text-xl font-semibold">
+                Full Account and Routing Number
+              </h2>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {/* Account number row */}
+
+              <div className="flex justify-start items-center">
+                <span className="text-sm font-medium min-w-[370px]">
+                  Account number
+                </span>
+                <span className="text-sm font-medium">
+                  {user?.accountNumber}
+                </span>
+                <div className="flex items-center justify-end gap-4 w-full">
+                  <button className="text-blue-600 ">
+                    <Printer size={20} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Routing number row */}
+              <div className="flex justify-start items-center">
+                <span className="text-sm font-medium w-[370px]">
+                  Routing number
+                </span>
+                <span className="text-sm font-medium">{user?.phone}</span>
+              </div>
+
+              {/* Note about routing number */}
+              <div className="py-4">
+                <p className="text-sm font-medium">
+                  This routing number can only be used for direct deposits and
+                  ACH transactions. For wire transfers, please use routing
+                  number {user?.phone && "021000021"}.
+                </p>
+              </div>
+            </div>
+
+            {/* Footer with close button */}
+            <div className="p-4 flex justify-end border-t border-gray-200">
+              <button
+                onClick={toggleModal}
+                className="px-6 py-2 bg-[#021e45] w-[160px] text-white font-medium rounded hover:bg-blue-900"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

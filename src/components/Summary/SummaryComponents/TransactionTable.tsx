@@ -216,7 +216,7 @@ export default function TransactionsTable() {
                       return (
                         <tr
                           key={transaction.id}
-                          className={`bg-white ${
+                          className={`bg-white hover:bg-[#eeeff0] cursor-pointer${
                             isLastInDateGroup ? "border-b border-black" : ""
                           }`}
                         >
