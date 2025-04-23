@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "../../providers/AuthProvider";
 
@@ -106,7 +106,14 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="h-full min-h-[500px] flex items-center justify-center bg-cover bg-center py-8">
+    <div className="h-full min-h-[500px] flex items-center justify-center bg-cover bg-center py-8 relative">
+      {/* Loading Spinner Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-white opacity-75 z-50">
+          <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+        </div>
+      )}
+
       <div className="bg-white p-8 rounded shadow-md w-[384px] h-auto">
         {loginError && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">
