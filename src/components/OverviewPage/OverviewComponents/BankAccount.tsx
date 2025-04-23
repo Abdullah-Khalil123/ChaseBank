@@ -63,7 +63,9 @@ const BankAccount = () => {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }),
-            accountType: user.accountType?.toUpperCase(),
+            accountType: `${user.accountType || "Account"} (...${
+              user.accountNumber?.slice(-4) || "0000"
+            })`,
           });
           setIsLoading(false);
           return;
