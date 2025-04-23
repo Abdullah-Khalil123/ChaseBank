@@ -28,6 +28,12 @@ export default function LoginForm() {
     token: false,
   });
 
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.title = `Sign in - chase.com`;
+    }
+  }, []);
+
   // Check if user is already authenticated and redirect if needed
   // This is needed to handle direct navigation to login page while already authenticated
   useEffect(() => {

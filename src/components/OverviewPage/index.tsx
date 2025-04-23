@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OverviewHeader from "../partials/overviewHeader";
 import OverviewDetail from "./overviewDetail";
 import BankAccount from "./OverviewComponents/BankAccount";
@@ -38,6 +38,12 @@ const OverviewPage = () => {
   const [InfoCardSelect] = useState(
     InfoCard[Math.floor(Math.random() * InfoCard.length)]
   );
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.title = `Accounts - chase.com`;
+    }
+  }, []);
   return (
     <div>
       <OverviewHeader showOptions />
