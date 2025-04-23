@@ -133,7 +133,7 @@ export default function LoginForm() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full py-1 border-b-2 border-blue-500 outline-none bg-transparent"
+              className="w-full py-1 border-b-[1px] border-black outline-none bg-transparent"
               required
             />
             {errors.email && (
@@ -159,11 +159,11 @@ export default function LoginForm() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full py-1 border-b-2 border-blue-500 outline-none bg-transparent"
+                className="w-full py-1 border-b-[1px] border-black outline-none bg-transparent"
                 required
               />
               <span
-                className="absolute right-0 top-1 text-sm text-blue-500 cursor-pointer"
+                className="absolute right-0 top-1 text-sm font-bold text-[#0060F0] cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 Show
@@ -247,14 +247,14 @@ export default function LoginForm() {
           <div className="mt-6 space-y-2">
             <Link
               href="/forgot-password"
-              className="text-blue-500 hover:underline flex items-center text-sm"
+              className="text-[#0060F0] hover:underline flex items-center text-sm"
             >
               Forgot username/password?{" "}
               <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
             <Link
               href="/signup"
-              className="text-blue-500 hover:underline flex items-center text-sm"
+              className="text-[#0060F0] hover:underline flex items-center text-sm"
             >
               Not Enrolled? Sign Up Now.{" "}
               <ChevronRight className="h-4 w-4 ml-1" />
