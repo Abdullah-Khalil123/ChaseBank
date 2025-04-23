@@ -89,6 +89,7 @@ const BalanceDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Set page title when component mounts
     const getUserData = () => {
       if (!isAuthenticated()) {
         router.push("/login"); // ✅ Redirect to login if not authenticated
@@ -129,7 +130,14 @@ const BalanceDetail = () => {
           console.error("Error parsing local user data:", error);
         }
       }
-
+      if (typeof document !== "undefined" && userData) {
+        document.title = `${
+          userData.accountType +
+            " (..." +
+            userData.accountNumber?.slice(-4) +
+            ")" || "Account"
+        }`;
+      }
       setLoading(false);
     };
 
