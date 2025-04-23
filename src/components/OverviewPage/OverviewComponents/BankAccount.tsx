@@ -11,6 +11,7 @@ interface AccountData {
   accountTitle: string;
   name: string;
   availableBalance: string;
+  accountType?: string;
   presentBalance: string;
   availableCredit: string;
   id?: string;
@@ -24,6 +25,7 @@ const BankAccount = () => {
     name: "",
     availableBalance: "",
     presentBalance: "",
+    accountType: "",
     availableCredit: "",
   });
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +63,7 @@ const BankAccount = () => {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }),
+            accountType: user.accountType?.toUpperCase(),
           });
           setIsLoading(false);
           return;
@@ -173,7 +176,7 @@ const BankAccount = () => {
             href={`/summary?id=${data.id}`}
             className="flex hover:bg-[#ebeff3] max-lg:mb-2 px-2 py-1 rounded-[5px] cursor-pointer items-center"
           >
-            {data.accountTitle} <ChevronRight />
+            {data.accountType} <ChevronRight />
           </Link>
           <div className="flex max-lg:justify-center">
             <button className="bg-darkBlue text-white text-sm font-bold px-2 rounded-[5px]">
