@@ -239,7 +239,13 @@ export default function TransactionsTable() {
                                 : ""
                             }`}
                           >
-                            {transaction.type}
+                            {transaction.type
+                              .split("_")
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1)
+                              )
+                              .join(" ")}
                           </td>
                           <td
                             className={`align-top px-6 py-4 whitespace-nowrap text-sm text-right font-bold ${getAmountColor(
