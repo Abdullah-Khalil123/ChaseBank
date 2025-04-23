@@ -150,7 +150,10 @@ const BalanceDetail = () => {
           {userData && (
             <>
               <p className="text-sm">{`${
-                userData.accountType || "Account"
+                userData.accountType +
+                  " (..." +
+                  userData.accountNumber?.slice(-4) +
+                  ")" || "Account"
               }`}</p>
               <p className="text-[12px] text-gray-600">
                 {userData.accountName || userData.name}

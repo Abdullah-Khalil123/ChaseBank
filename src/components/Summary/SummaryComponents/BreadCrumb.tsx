@@ -43,6 +43,8 @@ const BreadCrumb = () => {
           <Link href="/overview">Overview </Link>
         </span>
         / {userData?.accountType}
+        {" ("}... {userData?.accountNumber.slice(-4)}
+        {")"}
       </p>
     </div>
   );
