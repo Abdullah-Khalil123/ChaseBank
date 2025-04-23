@@ -9,6 +9,7 @@ interface Transaction {
   id: string;
   date: string;
   description: string;
+  updatedBalance: string;
   type: string;
   amount: string;
   balance: string;
@@ -216,7 +217,7 @@ export default function TransactionsTable() {
                       return (
                         <tr
                           key={transaction.id}
-                          className={`bg-white hover:bg-[#eeeff0] cursor-pointer${
+                          className={`bg-white hover:bg-[#eeeff0] cursor-pointer ${
                             isLastInDateGroup ? "border-b border-black" : ""
                           }`}
                         >
@@ -272,7 +273,7 @@ export default function TransactionsTable() {
                                 : ""
                             }`}
                           >
-                            {displayedBalance}
+                            ${transaction.updatedBalance}
                           </td>
                           <td
                             className={`align-top px-6 py-4 whitespace-nowrap text-right text-sm font-medium ${
