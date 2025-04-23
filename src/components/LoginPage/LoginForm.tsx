@@ -126,7 +126,7 @@ export default function LoginForm() {
               htmlFor="email"
               className="text-gray-600 text-sm font-medium"
             >
-              Email
+              Username
             </label>
             <input
               type="email"

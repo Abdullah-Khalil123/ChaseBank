@@ -45,8 +45,8 @@ const BankAccount = () => {
           // Use that data directly
           setData({
             id: user.id,
-            accountTitle: `${user.accountType || "Account"} (...${
-              user.accountNumber?.slice(-4) || "0000"
+            accountTitle: `${user.accountNumber || "Account"} (...${
+              user.id?.slice(-4) || "0000"
             })`,
             name: user.accountName?.toUpperCase() || user.name.toUpperCase(),
             availableBalance: user.balance.toLocaleString("en-US", {

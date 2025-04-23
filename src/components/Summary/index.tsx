@@ -136,14 +136,6 @@ const BalanceDetail = () => {
     getUserData();
   }, [user, isAuthenticated, router]); // ✅ Include dependencies
 
-  // Format numbers for display
-  // const formatCurrency = (value: number) => {
-  //   return value.toLocaleString("en-US", {
-  //     minimumFractionDigits: 2,
-  //     maximumFractionDigits: 2,
-  //   });
-  // };
-
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
   }
@@ -159,7 +151,7 @@ const BalanceDetail = () => {
             <>
               <p className="text-sm">{`${
                 userData.accountType || "Account"
-              } (...${userData.accountNumber?.slice(-4) || "0000"})`}</p>
+              }`}</p>
               <p className="text-[12px] text-gray-600">
                 {userData.accountName || userData.name}
               </p>
