@@ -84,15 +84,26 @@ interface UserData {
 
 const BalanceDetail = () => {
   const { user, isAuthenticated } = useAuth(); // ✅ Add isAuthenticated
-  const router = useRouter(); // ✅ Initialize router
+  const router = useRouter(); // Initialize router
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (typeof document !== "undefined" && userData) {
+      document.title = `${
+        userData.accountType +
+          " (..." +
+          userData.accountNumber?.slice(-4) +
+          ")" || "Account"
+      }`;
+    }
+  }, [userData]);
 
   useEffect(() => {
     // Set page title when component mounts
     const getUserData = () => {
       if (!isAuthenticated()) {
-        router.push("/login"); // ✅ Redirect to login if not authenticated
+        router.push("/login"); // Redirect to login if not authenticated
         return;
       }
 
@@ -142,7 +153,7 @@ const BalanceDetail = () => {
     };
 
     getUserData();
-  }, [user, isAuthenticated, router]); // ✅ Include dependencies
+  }, [user, isAuthenticated, router]); // Include dependencies
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
