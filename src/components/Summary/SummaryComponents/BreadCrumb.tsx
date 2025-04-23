@@ -42,7 +42,7 @@ const BreadCrumb = () => {
         <span className="text-[#0d5fb6] underline underline-offset-[3px]">
           <Link href="/overview">Overview </Link>
         </span>
-        / {userData?.accountNumber}
+        / {userData?.accountType}
       </p>
     </div>
   );
