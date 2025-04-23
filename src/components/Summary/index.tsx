@@ -8,6 +8,8 @@ import OverviewHeader from "../partials/overviewHeader";
 import { ChevronDown } from "lucide-react";
 import UpgradeCheckout from "../OverviewPage/OverviewComponents/UpgradeCheckout";
 import TransactionsTable from "./SummaryComponents/TransactionTable";
+import { useAuth } from "@/providers/AuthProvider";
+import { useRouter } from "next/navigation";
 
 const InfoCard = [
   {
@@ -28,7 +30,6 @@ const InfoCard = [
     tag: "Find the right solution to help you manage your business finances.",
     button: "Check your offers",
   },
-
   {
     img: "/save.jpg",
     head: "Upgrade your checkout",
@@ -65,37 +66,88 @@ const SummaryPage = () => {
   );
 };
 
-interface BalanceData {
-  accountTitle: string;
+interface UserData {
+  id: string;
   name: string;
-  availableBalance: string;
-  presentBalance: string;
-  availableCredit: string;
+  email: string;
+  phone: string;
+  address: string;
+  accountName: string;
+  accountType: string;
+  accountNumber: string;
+  role: boolean;
+  balance: number;
+  availableCredit: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const BalanceDetail = () => {
-  const [data, setData] = useState<BalanceData>({
-    accountTitle: "",
-    name: "",
-    availableBalance: "",
-    presentBalance: "",
-    availableCredit: "",
-  });
+  const { user, isAuthenticated } = useAuth(); // ✅ Add isAuthenticated
+  const router = useRouter(); // ✅ Initialize router
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("accountData");
-    if (stored) {
-      setData(JSON.parse(stored));
-    } else {
-      setData({
-        accountTitle: "BUS COMPLETE CHK (...6032)",
-        name: "TIGER PRODUCTS LLC",
-        availableBalance: "20,249.75",
-        presentBalance: "20,249.75",
-        availableCredit: "0.00",
-      });
-    }
-  }, []);
+    const getUserData = () => {
+      if (!isAuthenticated()) {
+        router.push("/login"); // ✅ Redirect to login if not authenticated
+        return;
+      }
+
+      if (user) {
+        setUserData({
+          ...user,
+          phone: user.phone || "",
+          address: user.address || "",
+          accountName: user.accountName || "",
+          accountNumber: user.accountNumber || "",
+          accountType: user.accountType || "",
+        } as UserData);
+        setLoading(false);
+        return;
+      }
+
+      const sessionUser =
+        typeof window !== "undefined" ? sessionStorage.getItem("user") : null;
+      if (sessionUser) {
+        try {
+          setUserData(JSON.parse(sessionUser));
+          setLoading(false);
+          return;
+        } catch (error) {
+          console.error("Error parsing session user data:", error);
+        }
+      }
+
+      const localUser =
+        typeof window !== "undefined" ? localStorage.getItem("user") : null;
+      if (localUser) {
+        try {
+          setUserData(JSON.parse(localUser));
+        } catch (error) {
+          console.error("Error parsing local user data:", error);
+        }
+      }
+
+      setLoading(false);
+    };
+
+    getUserData();
+  }, [user, isAuthenticated, router]); // ✅ Include dependencies
+
+  // Format numbers for display
+  // const formatCurrency = (value: number) => {
+  //   return value.toLocaleString("en-US", {
+  //     minimumFractionDigits: 2,
+  //     maximumFractionDigits: 2,
+  //   });
+  // };
+
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
+
   return (
     <div className="bg-white pb-6">
       <OverviewHeader showOptions={false} />
@@ -103,9 +155,20 @@ const BalanceDetail = () => {
         <div className="w-[968px] mx-screen-x">
           <BreadCrumb />
           <Divider />
-          <p className="text-sm">{data.accountTitle}</p>
-          <p className="text-[12px] text-gray-600">{data.name}</p>
-          <Balance data={data} />
+          {userData && (
+            <>
+              <p className="text-sm">{`${
+                userData.accountType || "Account"
+              } (...${userData.accountNumber?.slice(-4) || "0000"})`}</p>
+              <p className="text-[12px] text-gray-600">
+                {userData.accountName || userData.name}
+              </p>
+              <Balance
+                balance={userData.balance}
+                availableCredit={userData.availableCredit}
+              />
+            </>
+          )}
           <div className="mt-4" />
           <Divider />
           <div className="mt-6" />
@@ -124,12 +187,30 @@ const BalanceDetail = () => {
   );
 };
 
-const Balance = ({ data }: { data: BalanceData }) => {
+interface BalanceProps {
+  balance: number;
+  availableCredit: number;
+}
+
+const Balance = ({ balance, availableCredit }: BalanceProps) => {
+  // Format numbers for display
+  const formatCurrency = (value: number) => {
+    return value.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const availableBalance = formatCurrency(balance);
+  const presentBalance = formatCurrency(balance);
+  const availableCreditFormatted = formatCurrency(availableCredit);
+  const totalAvailable = formatCurrency(balance + availableCredit);
+
   return (
     <div>
       <div className="flex justify-between gap-2 pb-2 items-start font-bold pt-4">
         <div className="mb-4">
-          <h1 className="text-4xl">${data.availableBalance}</h1>
+          <h1 className="text-4xl">${availableBalance}</h1>
           <p className="text-sm font-normal border-b border-dashed border-gray-500 w-fit">
             Available balance
           </p>
@@ -140,19 +221,17 @@ const Balance = ({ data }: { data: BalanceData }) => {
       </div>
       <div className="flex">
         <div className="w-[218px]">
-          <h1 className="font-bold">${data.presentBalance}</h1>
-          <p className=" text-sm border-b border-dashed border-gray-500 w-fit">
+          <h1 className="font-bold">${presentBalance}</h1>
+          <p className="text-sm border-b border-dashed border-gray-500 w-fit">
             Present balance
           </p>
         </div>
         <div className="w-[218px]">
-          <h1 className="font-bold">${data.availableBalance}</h1>
+          <h1 className="font-bold">${availableCreditFormatted}</h1>
           <p className="text-sm w-fit text-gray-text">Available credit</p>
         </div>
         <div className="w-[218px]">
-          <h1 className="font-bold">
-            ${data.availableBalance + data.availableCredit}
-          </h1>
+          <h1 className="font-bold">${totalAvailable}</h1>
           <p className="text-sm w-fit text-gray-text">Available plus credit</p>
         </div>
       </div>
@@ -170,4 +249,5 @@ const UncollectedFunds = () => {
     </div>
   );
 };
+
 export default SummaryPage;

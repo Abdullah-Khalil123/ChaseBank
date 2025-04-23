@@ -1,40 +1,65 @@
 "use client";
 
-import { useState } from "react";
-import Head from "next/head";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "../../providers/AuthProvider";
 
 export default function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirectUrl") || "/overview";
+  const { login, isAuthenticated, getToken } = useAuth();
 
-  const [username, setUsername] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [useToken, setUseToken] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [debugInfo, setDebugInfo] = useState("");
   const [errors, setErrors] = useState({
-    username: false,
+    email: false,
     password: false,
     token: false,
   });
 
-  interface LoginCredentials {
-    username: string;
-    password: string;
-    token?: string;
-    rememberMe: boolean;
-    useToken: boolean;
-  }
+  // Check if user is already authenticated and redirect if needed
+  // This is needed to handle direct navigation to login page while already authenticated
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuth = isAuthenticated();
+      const currentToken = getToken();
+      console.log(
+        "Login page auth check:",
+        isAuth ? "Authenticated" : "Not authenticated"
+      );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+      if (isAuth && currentToken) {
+        console.log(
+          "User is already authenticated, redirecting to:",
+          redirectUrl
+        );
+        router.replace(redirectUrl);
+      }
+    };
+
+    checkAuth();
+  }, [isAuthenticated, redirectUrl, router, getToken]);
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
+    setLoginError("");
+    setDebugInfo("");
 
     // Validate fields
     const newErrors = {
-      username: username.trim() === "",
+      email: email.trim() === "",
       password: password.trim() === "",
       token: useToken && token.trim() === "",
     };
@@ -43,24 +68,33 @@ export default function LoginForm() {
 
     // If no errors, proceed with login
     if (
-      !newErrors.username &&
+      !newErrors.email &&
       !newErrors.password &&
       !(useToken && newErrors.token)
     ) {
-      // Handle login logic here
-      const credentials: LoginCredentials = {
-        username,
-        password,
-        rememberMe,
-        useToken,
-      };
+      setIsLoading(true);
 
-      if (useToken) {
-        credentials.token = token;
+      try {
+        // Use the login function from AuthProvider
+        await login(email, password, rememberMe);
+
+        // Debug check after login
+        const currentToken = getToken();
+        console.log("After login, token exists:", currentToken ? "Yes" : "No");
+        setDebugInfo(`Login successful!`);
+
+        // Redirect after login
+        console.log("Redirecting to", decodeURIComponent(redirectUrl));
+        router.push(decodeURIComponent(redirectUrl));
+      } catch (error) {
+        console.error("Login error:", error);
+        setLoginError(
+          error instanceof Error
+            ? error.message
+            : "An error occurred during login"
+        );
+        setIsLoading(false);
       }
-
-      console.log(credentials);
-      router.push("/overview");
     }
   };
 
@@ -72,36 +106,42 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="h-[500px] flex items-center justify-center bg-cover bg-center">
-      <Head>
-        <title>Login</title>
-        <meta name="description" content="Login page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="h-full min-h-[500px] flex items-center justify-center bg-cover bg-center py-8">
+      <div className="bg-white p-8 rounded shadow-md w-[384px] h-auto">
+        {loginError && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">
+            {loginError}
+          </div>
+        )}
 
-      <div className="bg-white p-8 rounded shadow-md w-[384px] h-[391px]">
+        {debugInfo && (
+          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded text-sm">
+            {debugInfo}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-6 relative">
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="text-gray-600 text-sm font-medium"
             >
-              Username
+              Email
             </label>
             <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full py-1 border-b-2 border-blue-500 outline-none bg-transparent"
               required
             />
-            {errors.username && (
+            {errors.email && (
               <div className="flex items-center mt-1 text-xs text-red-500">
                 <span className="inline-flex items-center justify-center w-4 h-4 mr-1 rounded-full bg-red-100 text-red-500">
                   !
                 </span>
-                Please tell us your username.
+                Please enter your email.
               </div>
             )}
           </div>
@@ -134,7 +174,7 @@ export default function LoginForm() {
                 <span className="inline-flex items-center justify-center w-4 h-4 mr-1 rounded-full bg-red-100 text-red-500">
                   !
                 </span>
-                Please tell us your password.
+                Please enter your password.
               </div>
             )}
           </div>
@@ -160,7 +200,7 @@ export default function LoginForm() {
                   <span className="inline-flex items-center justify-center w-4 h-4 mr-1 rounded-full bg-red-100 text-red-500">
                     !
                   </span>
-                  Please tell us your token code.
+                  Please enter your token code.
                 </div>
               )}
             </div>
@@ -196,9 +236,12 @@ export default function LoginForm() {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors"
+            disabled={isLoading}
+            className={`w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors ${
+              isLoading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Sign in
+            {isLoading ? "Signing in..." : "Sign in"}
           </button>
 
           <div className="mt-6 space-y-2">

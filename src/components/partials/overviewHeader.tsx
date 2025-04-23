@@ -4,9 +4,17 @@ import React from "react";
 import ChaseLogo from "../../../public/logo_chase_for_business_wht.svg";
 import { Menu, Search, FlagIcon, UserCircle } from "lucide-react";
 import Image from "next/image";
+import { useAuth } from "@/providers/AuthProvider"; // Import the auth context
 
-const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
+const OverviewHeader = ({ showOptions = true }: { showOptions?: boolean }) => {
+  const { logout } = useAuth(); // Get the logout function from auth context
   const IconClassName = "text-white";
+
+  const handleSignOut = (e: React.MouseEvent) => {
+    e.preventDefault();
+    logout();
+  };
+
   return (
     <div className="bg-[#002f6c] text-white">
       <div className="h-[60px] flex justify-between items-center px-[32px] max-w-[1440px] mx-auto">
@@ -24,7 +32,9 @@ const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
           <button className="bg-white font-sm font-bold text-[#0d5fb6] px-2 py-1 rounded-[5px] text-sm max-lg:hidden">
             Open an account
           </button>
-          <button className="text-sm font-bold">Sign out</button>
+          <button className="text-sm font-bold" onClick={handleSignOut}>
+            Sign out
+          </button>
         </div>
       </div>
       <OverviewLinks />
@@ -32,8 +42,6 @@ const OverviewHeader = ({ showOptions = true }: { showOptions: boolean }) => {
     </div>
   );
 };
-
-import { useState } from "react";
 
 const OverviewLinks = () => {
   const Links = [
@@ -95,5 +103,7 @@ const OverviewLinkOptions = () => {
     </div>
   );
 };
+
+import { useState } from "react";
 
 export default OverviewHeader;

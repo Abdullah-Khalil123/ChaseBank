@@ -3,36 +3,155 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight, Printer, ChevronUp, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/AuthProvider";
+
+// Define types for our data
+interface AccountData {
+  accountTitle: string;
+  name: string;
+  availableBalance: string;
+  presentBalance: string;
+  availableCredit: string;
+  id?: string;
+}
 
 const BankAccount = () => {
-  const [data, setData] = useState<{
-    accountTitle: string;
-    name: string;
-    availableBalance: string;
-    presentBalance: string;
-    availableCredit: string;
-  }>({
+  const { user, isAuthenticated } = useAuth();
+  const router = useRouter();
+  const [data, setData] = useState<AccountData>({
     accountTitle: "",
     name: "",
     availableBalance: "",
     presentBalance: "",
     availableCredit: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("accountData");
-    if (stored) {
-      setData(JSON.parse(stored));
-    } else {
-      setData({
-        accountTitle: "BUS COMPLETE CHK (...6032)",
-        name: "TIGER PRODUCTS LLC",
-        availableBalance: "20,249.75",
-        presentBalance: "20,249.75",
-        availableCredit: "0.00",
-      });
-    }
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        // First check if authenticated
+        if (!isAuthenticated()) {
+          // Redirect to login - let middleware handle it
+          router.push("/login");
+          // router.replace("/login");
+          return;
+        }
+
+        // First check if we have user data from auth context
+        if (user && user.id) {
+          // Use that data directly
+          setData({
+            id: user.id,
+            accountTitle: `${user.accountType || "Account"} (...${
+              user.accountNumber?.slice(-4) || "0000"
+            })`,
+            name: user.accountName?.toUpperCase() || user.name.toUpperCase(),
+            availableBalance: user.balance.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            presentBalance: user.balance.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            availableCredit: user.availableCredit.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        // If not in auth context, check localStorage and sessionStorage
+        let userJson = sessionStorage.getItem("user");
+
+        // If not in session storage, try local storage
+        if (!userJson) {
+          userJson = localStorage.getItem("user");
+        }
+
+        const parsedUser = userJson ? JSON.parse(userJson) : null;
+        const userId = parsedUser?.id;
+
+        if (!userId) {
+          // Instead of throwing an error that might flash before redirect,
+          // just trigger a redirect to login
+          console.error("User ID not found, redirecting to login");
+          router.push("/login");
+          return;
+        }
+
+        // Format the data for display from storage
+        const formattedData = {
+          id: parsedUser.id,
+          accountTitle: `${parsedUser.accountType || "Account"} (...${
+            parsedUser.accountNumber?.slice(-4) || "0000"
+          })`,
+          name:
+            parsedUser.accountName?.toUpperCase() ||
+            parsedUser.name.toUpperCase(),
+          availableBalance: parsedUser.balance.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+          presentBalance: parsedUser.balance.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+          availableCredit: parsedUser.availableCredit.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+        };
+
+        setData(formattedData);
+        setIsLoading(false);
+      } catch (err: unknown) {
+        console.error("Error fetching account data:", err);
+
+        // Only show error if not authentication related
+        if (
+          err &&
+          typeof err === "object" &&
+          "message" in err &&
+          typeof err.message === "string" &&
+          err.message !== "User not logged in"
+        ) {
+          setError("Could not load account data");
+        }
+        // Use unknown type for error and then narrow it down
+        if (
+          err &&
+          typeof err === "object" &&
+          "message" in err &&
+          typeof err.message === "string"
+        ) {
+          if (err.message === "User not logged in") {
+            router.push("/login");
+          } else {
+            setError("Could not load account data");
+          }
+        } else {
+          setError("An unexpected error occurred");
+        }
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [user, router, isAuthenticated]);
+
+  if (isLoading) {
+    return (
+      <div className="rounded-[10px] bg-white border-[1px] border-gray-300 p-8 text-center">
+        <p>Loading account information...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-[10px] bg-white border-[1px] border-gray-300">
@@ -51,7 +170,7 @@ const BankAccount = () => {
       <div>
         <div className="lg:flex justify-between items-center text-blue font-bold px-4 pt-4">
           <Link
-            href={"/summary"}
+            href={`/summary?id=${data.id}`}
             className="flex hover:bg-[#ebeff3] max-lg:mb-2 px-2 py-1 rounded-[5px] cursor-pointer items-center"
           >
             {data.accountTitle} <ChevronRight />
@@ -91,6 +210,12 @@ const BankAccount = () => {
           </div>
         </div>
       </div>
+
+      {error && (
+        <div className="bg-red-50 text-red-600 p-2 text-sm text-center">
+          {error}
+        </div>
+      )}
     </div>
   );
 };
