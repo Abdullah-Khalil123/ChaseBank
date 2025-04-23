@@ -13,7 +13,8 @@ export default function LoginForm() {
   const { login, isAuthenticated, getToken } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,7 @@ export default function LoginForm() {
   const [loginError, setLoginError] = useState("");
   const [debugInfo, setDebugInfo] = useState("");
   const [errors, setErrors] = useState({
-    email: false,
+    username: false,
     password: false,
     token: false,
   });
@@ -59,7 +60,7 @@ export default function LoginForm() {
 
     // Validate fields
     const newErrors = {
-      email: email.trim() === "",
+      username: username.trim() === "",
       password: password.trim() === "",
       token: useToken && token.trim() === "",
     };
@@ -68,7 +69,7 @@ export default function LoginForm() {
 
     // If no errors, proceed with login
     if (
-      !newErrors.email &&
+      !newErrors.username &&
       !newErrors.password &&
       !(useToken && newErrors.token)
     ) {
@@ -76,7 +77,7 @@ export default function LoginForm() {
 
       try {
         // Use the login function from AuthProvider
-        await login(email, password, rememberMe);
+        await login(username, password, rememberMe);
 
         // Debug check after login
         const currentToken = getToken();
@@ -130,25 +131,25 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit}>
           <div className="mb-6 relative">
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="text-gray-600 text-sm font-medium"
             >
               Username
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full py-1 border-b-[1px] border-black outline-none bg-transparent"
               required
             />
-            {errors.email && (
+            {errors.username && (
               <div className="flex items-center mt-1 text-xs text-red-500">
                 <span className="inline-flex items-center justify-center w-4 h-4 mr-1 rounded-full bg-red-100 text-red-500">
                   !
                 </span>
-                Please enter your email.
+                Please enter your username.
               </div>
             )}
           </div>

@@ -155,13 +155,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = async (
-    email: string,
+    username: string,
     password: string,
     rememberMe: boolean
   ): Promise<User> => {
     try {
       const response = await axiosInstance.post<LoginResponse>("/auth/login", {
-        email,
+        username,
         password,
       });
 
