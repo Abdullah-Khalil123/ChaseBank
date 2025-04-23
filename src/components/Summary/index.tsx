@@ -305,7 +305,7 @@ export function AccountInfoModal({ user }: { user: UserData | null }) {
                 <p className="text-sm font-medium">
                   This routing number can only be used for direct deposits and
                   ACH transactions. For wire transfers, please use routing
-                  number {user?.phone && "021000021"}.
+                  number {user?.phone}.
                 </p>
               </div>
             </div>
