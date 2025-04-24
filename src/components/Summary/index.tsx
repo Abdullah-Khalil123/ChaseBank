@@ -288,12 +288,10 @@ export function AccountInfoModal({ user }: { user: UserData | null }) {
       {isOpen && (
         <div className="fixed inset-0 bg-black-opacity-40 flex items-center justify-center z-50">
           {/* Modal card */}
-          <div className="bg-white rounded-md w-full max-w-[860px] mx-4">
+          <div className="bg-white rounded-md w-full max-w-[870px] mx-4">
             {/* Header */}
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold">
-                Full Account and Routing Number
-              </h2>
+            <div className="pt-4 pl-4">
+              <h2 className="font-semibold">Full Account and Routing Number</h2>
             </div>
 
             {/* Content */}
@@ -323,7 +321,7 @@ export function AccountInfoModal({ user }: { user: UserData | null }) {
               </div>
 
               {/* Note about routing number */}
-              <div className="py-4">
+              <div className="pt-4">
                 <p className="text-sm font-medium">
                   This routing number can only be used for direct deposits and
                   ACH transactions. For wire transfers, please use routing
@@ -333,7 +331,7 @@ export function AccountInfoModal({ user }: { user: UserData | null }) {
             </div>
 
             {/* Footer with close button */}
-            <div className="p-4 flex justify-end border-t border-gray-200">
+            <div className="p-4 flex justify-end">
               <button
                 onClick={toggleModal}
                 className="px-6 py-2 bg-[#021e45] w-[160px] text-white font-medium rounded hover:bg-blue-900"
